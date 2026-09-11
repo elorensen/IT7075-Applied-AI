@@ -1,0 +1,1 @@
+print("IT7075 AI environment is working!")
