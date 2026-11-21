@@ -1,0 +1,87 @@
+{
+  "about": "TEMPLATE — copy this to my_alerts.json and replace the examples with 12 alerts of your own: 6 with expected='escalate' and 6 with expected='close'. Base them on real alert types (Windows event logs, EDR detections, cloud audit trails, IDS signatures) and write them in your own words.",
+  "how_to_fill_this_in": {
+    "id": "A01 .. A12",
+    "alert": "the alert text as it would appear in a console — one sentence",
+    "expected": "'escalate' if an analyst must look at it now, 'close' if it is routine noise",
+    "note": "one line saying WHY an analyst would make that call. If you cannot justify it, it is not a good test case."
+  },
+  "include_at_least_two_hard_cases": [
+    "one alert you would ESCALATE whose text contains none of your keywords (a missed detection waiting to happen)",
+    "one alert you would CLOSE that does contain one of your keywords (an over-escalation waiting to happen)"
+  ],
+  "alerts": [
+    {
+  "id": "A01",
+  "alert": "Email security gateway detected a suspicious message impersonating Microsoft 365 support. The email directs an employee to a fraudulent login page designed to collect corporate credentials.",
+  "expected": "escalate",
+  "note": "The email is attempting to steal employee credentials through a fake login page. The security team should investigate the message, block the URL, and check whether any employees interacted with it."
+    },
+    {
+  "id": "A02",
+  "alert": "Endpoint monitoring detected an encoded PowerShell command launched from a temporary directory. The process attempted to download and execute a script from an unfamiliar external server.",
+  "expected": "escalate",
+  "note": "An encoded PowerShell command downloading an external script is suspicious and may indicate malicious code execution. The security team should investigate the process, review the downloaded content, and determine whether the endpoint has been compromised."
+    },
+    {
+  "id": "A03",
+  "alert": "Windows security logs recorded the creation of a new local administrator account on a production server outside normal business hours. No approved change request was associated with the activity.",
+  "expected": "escalate",
+  "note": "Creating a privileged account without an approved change request could indicate unauthorized access or an attempt to maintain persistence. The security team should investigate who created the account, review the associated login activity, and determine whether the account needs to be disabled."
+    },
+    {
+  "id": "A04",
+  "alert": "Scheduled vulnerability scan detected critical findings on a designated test server. The activity matches an approved security assessment conducted by the internal IT team.",
+  "expected": "close",
+  "note": "The scan was authorized and performed against a designated test server. Although the alert contains the word critical, the activity itself is expected and does not require incident escalation. Any identified vulnerabilities can be handled through the normal remediation process."
+    },
+    {
+  "id": "A05",
+  "alert": "Endpoint detection software identified ransomware activity on an employee workstation. Multiple documents were rapidly encrypted, and the process attempted to modify backup recovery settings.",
+  "expected": "escalate",
+  "note": "Rapid file encryption and attempts to interfere with backups are strong indicators of ransomware. The security team should immediately investigate, isolate the affected workstation, and determine whether additional systems have been impacted."
+    },
+    {
+  "id": "A06",
+  "alert": "Network monitoring detected an unusually large outbound transfer of confidential company files to an unfamiliar external IP address. The transfer occurred outside business hours from a workstation that does not normally handle sensitive information.",
+  "expected": "escalate",
+  "note": "An unusually large transfer of confidential files to an unknown external destination may indicate data exfiltration. The security team should investigate the source workstation, identify the destination, and determine whether sensitive company information was compromised."
+    },
+    {
+  "id": "A07",
+  "alert": "Identity monitoring detected 15 consecutive MFA approval requests sent to an employee's mobile device within five minutes. One request was eventually approved from an unfamiliar geographic location.",
+  "expected": "escalate",
+  "note": "Repeated MFA requests followed by an unexpected approval may indicate an MFA fatigue attack or compromised credentials. The security team should investigate the login activity, contact the employee, and revoke any suspicious active sessions."
+    },
+    {
+  "id": "A08",
+  "alert": "Email monitoring flagged a simulated phishing message sent to employees as part of the company's scheduled KnowBe4 security awareness campaign. The message was distributed by the authorized training platform.",
+  "expected": "close",
+  "note": "The phishing email is part of an approved security awareness exercise rather than an actual attack. Since the campaign was authorized and distributed through the company's training platform, the alert does not require incident escalation."
+    },
+    {
+  "id": "A09",
+  "alert": "Microsoft Defender detected the EICAR antivirus test file during a scheduled endpoint security validation. The test file was automatically quarantined, and no additional suspicious activity was observed.",
+  "expected": "close",
+  "note": "The EICAR file is a harmless test file used to verify that antivirus software is functioning correctly. Since the detection occurred during an authorized test and the file was successfully quarantined, no incident escalation is necessary."
+    },
+    {
+  "id": "A10",
+  "alert": "Authentication logs recorded a single failed login attempt from a recognized corporate workstation. The employee successfully authenticated on the next attempt using the correct password and MFA verification.",
+  "expected": "close",
+  "note": "A single failed login followed by successful authentication from a trusted corporate workstation is consistent with normal user error. Without additional suspicious activity or repeated failures, the event does not require incident escalation."
+    },
+    {
+  "id": "A11",
+  "alert": "Windows security logs recorded an administrator performing a scheduled password reset and account permissions update during an approved maintenance window. The activity matched an authorized IT service ticket.",
+  "expected": "close",
+  "note": "Although administrative account changes can indicate suspicious activity, this event was performed by an authorized IT employee during a scheduled maintenance window. The matching service ticket confirms the activity was expected, so incident escalation is unnecessary."
+    },
+    {
+  "id": "A12",
+  "alert": "Email security filtering automatically quarantined a bulk marketing message from an unfamiliar external sender. The message was never delivered to the employee's inbox, and no links or attachments were opened.",
+  "expected": "close",
+  "note": "The email was successfully blocked by the existing security controls before reaching the employee. There is no evidence of user interaction or account compromise, so the event can be closed as routine filtering activity."
+    } 
+  ]
+}
